@@ -7,6 +7,7 @@
 #include <vector>
 
 using json = nlohmann::json;
+static String SERVER_URL = "192.168.50.232";
 
 class Photomath {
 public:

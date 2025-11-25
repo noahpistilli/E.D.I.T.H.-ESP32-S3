@@ -27,7 +27,8 @@ You will require the materials in [Parts Used](#parts-used).
 1. Use your IDE of choice to open the PlatformIO project. CLion has a wonderful plugin where you just click the run button and it uploads.
 2. Wire the components to match the pins in the code (Wiring diagram soon).
 3. Clone the [proxy server](https://github.com/noahpistilli/E.D.I.T.H.-Glasses-Proxy-Server) and run it. You will need Python 3.12 at minimum.
-4. Upload to the ESP, and say "EDITH", followed by "solve equation". Point ESP camera to equation and watch it solve.
+4. Update `SERVER_URL` to be the IP address of the proxy server
+5. Upload to the ESP, and say "EDITH", followed by "solve equation". Point ESP camera to equation and watch it solve.
 
 
 ## Parts Used

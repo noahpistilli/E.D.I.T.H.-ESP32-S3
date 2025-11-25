@@ -100,7 +100,7 @@ void loop() {
 
         // Send voice prompt to proxy server
         HTTPClient http;
-        http.begin("http://192.168.50.232/audio");
+        http.begin("http://" +  SERVER_URL + "/audio");
         http.addHeader("Content-Type", "application/octet-stream");
 
         // Send raw PCM buffer

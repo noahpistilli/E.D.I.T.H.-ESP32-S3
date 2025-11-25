@@ -103,14 +103,14 @@ bool Photomath::createRequest() {
 
     size_t totalLen = head.length() + fb->len + tail.length();
 
-    if (!client.connect("192.168.50.232", 80)) {
+    if (!client.connect(SERVER_URL.c_str(), 80)) {
         Serial.println(client.connected());
         Serial.println("HTTP begin failed");
         return false;
     }
 
     client.println("POST / HTTP/1.1");
-    client.println("Host: 192.168.50.232");
+    client.println("Host: " + SERVER_URL);
     client.println("Content-Type: multipart/form-data; boundary=" + boundary);
     client.println("Content-Length: " + String(totalLen));
     client.println();
