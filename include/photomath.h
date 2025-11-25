@@ -1,20 +1,19 @@
 #pragma once
 
 #include <string>
+#include <Arduino.h>
 #include <json.hpp>
 #include <unordered_map>
 #include <vector>
-#include <UUID.h>
 
 using json = nlohmann::json;
 
 class Photomath {
 public:
-    Photomath();
     std::string parseEquation();
     std::string parseSolution();
     std::string parseChildren(const std::vector<json>& children, const std::string& type);
-    void createRequest();
+    bool createRequest();
 
 private:
     std::unordered_map<std::string, std::string> m_op_map{
@@ -31,6 +30,5 @@ private:
         {"elem_of", "E"}
     };
 
-    UUID m_uuid{};
     String m_body{};
 };

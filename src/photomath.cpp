@@ -5,15 +5,8 @@
 #include <esp_camera.h>
 
 
-Photomath::Photomath() {
-    uint32_t seed1 = random(999999999);
-    uint32_t seed2 = random(999999999);
-    m_uuid.seed(seed1, seed2);
-}
-
 std::string Photomath::parseEquation() {
     auto j = json::parse(m_body);
-    Serial.println("Parsing equation");
     auto inp = j["normalizedInput"];
     auto node = inp["node"];
 
@@ -94,7 +87,7 @@ std::string Photomath::parseChildren(const std::vector<json>& children, const st
     return ret;
 }
 
-void Photomath::createRequest() {
+bool Photomath::createRequest() {
     // ESP has no built-in library to handle multipart/form-data. Here we go.
     // Photomath likes the boundary to be 'BOUNDARY'. RFC says it can be any combination of ASCII but whatever
     WiFiClient client;
@@ -113,7 +106,7 @@ void Photomath::createRequest() {
     if (!client.connect("192.168.50.232", 80)) {
         Serial.println(client.connected());
         Serial.println("HTTP begin failed");
-        return;
+        return false;
     }
 
     client.println("POST / HTTP/1.1");
@@ -151,5 +144,9 @@ void Photomath::createRequest() {
     }
 
     client.stop();
+
+    // Parse JSON and determine success.
+    auto j = json::parse(m_body);
+    return j["success"].get<bool>();
 }
 
